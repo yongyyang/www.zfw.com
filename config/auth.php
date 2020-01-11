@@ -67,7 +67,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            //后台登录的模型路径
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [

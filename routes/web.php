@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//后台模块
+Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'],function (){
+    //后台登录显示
+    Route::get('login','LoginController@index')->name('login');
+    //后台登录处理
+    Route::post('login','LoginController@login')->name('login');
+    Route::group(['middleware'=>['checkadminlogin']],function (){
+        // 后台首页
+        Route::get('index', 'IndexController@index')->name('index');
+        // 欢迎页
+        Route::get('welcome', 'IndexController@welcome')->name('welcome');
+
+        // 后台用户退出
+        Route::get('logout','IndexController@logout')->name('logout');
+
+    });
+});
