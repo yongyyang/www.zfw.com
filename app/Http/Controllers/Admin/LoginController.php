@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Mail\Message;
+use Mail;
 //模型
 
 class LoginController extends Controller
@@ -55,6 +56,15 @@ class LoginController extends Controller
         if(!$bool){
             return redirect()->back()->with('error','登录账号异常');
         }
+        $email=\Auth::user()['email'];
+        $data['email']=$email;
+        //发送通知邮件
+        Mail::send('mail.login',compact('data'),function(Message $message)use($data){
+            //接收邮件用户
+            $message->to($data['email'],$data['username']);
+            //邮件主题
+            $message->subject('登录成功通知');
+        });
         //记录登录ip
         $ip=$request->ip();
         //使用auth()中有一个user方法，返回当前登录的模型对象

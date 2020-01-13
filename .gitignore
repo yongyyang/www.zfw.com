@@ -4,6 +4,7 @@
 npm-debug.log
 yarn-error.log
 /.idea
+/.env
 /vendor
 bootstrap/cache/*.php
 storage/app/public/

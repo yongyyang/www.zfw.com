@@ -16,18 +16,8 @@
 <body>
 <div class="loginWraper">
     <div id="loginform" class="loginBox">
-        <!--闪存的提示-->
-        @if(session()->has('error'))
-            <div class="Huialert Huialert-error">{{session('error')}}</div>
-        @endif
-    <!--表单验证提示-->
-        @if($errors->any())
-            <ul class=" Huialert Huialert-error">
-                @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        @endif
+        <!--公用模版引用-->
+       @include('admin.common.msg')
         <form class="form form-horizontal" action="" method="post">
             @csrf
             <div class="row cl">
